@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const abueloSchema = new Schema(
     {
         fechaIngreso: {type:String, required:true},
+        perfil: {type:String, required:true},
         nombre: {type:String, required:true},
         apellido: {type:String, required:true},
         documento: {type:String, required:true},
