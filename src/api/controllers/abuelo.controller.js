@@ -26,17 +26,39 @@ const getAbuelos = async(req, res) => {
 
 const postAbuelos = async(req, res) => {
     try {
-        console.log(req.file);
+        //console.log("req-files -----------", req.files);
+        //console.log("req-body -----------", req.body);
         const newAbuelo = new Abuelo(req.body);
         if (req.file) {
-            newAbuelo.foto = req.file.path;
+            newAbuelo.perfil.push(req.file[0].path);
         }
-        const createdAbuelo = await newAbuelo.save();   
+        else if (req.files) {
+            console.log(req.files)
+            if(req.files.perfil){
+                newAbuelo.perfil = req.files.perfil[0].path
+            }
+            if(req.files.documentoFrente){
+                newAbuelo.documentoFrente = req.files.documentoFrente[0].path
+            }
+            if(req.files.documentoDorso){
+                newAbuelo.documentoDorso = req.files.documentoDorso[0].path
+            }
+            if(req.files.prepagaFrente){
+                newAbuelo.prepagaFrente = req.files.prepagaFrente[0].path
+            }
+            if(req.files.prepagaDorso){
+                newAbuelo.prepagaDorso = req.files.prepagaDorso[0].path
+            }
+        }
+
+        const createdAbuelo = await newAbuelo.save();
         return res.status(201).json(createdAbuelo);
     } catch (error) {
         return res.status(500).json(error);
     }
 }
+    
+
 
 const putAbuelos = async(req, res) => {
     try {

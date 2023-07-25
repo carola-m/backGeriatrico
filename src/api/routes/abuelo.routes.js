@@ -7,8 +7,8 @@ const abueloRoutes = express.Router();
 
 abueloRoutes.get("/",getAbuelos);
 abueloRoutes.get("/id/:id",getAbuelosByID);
-abueloRoutes.post("/", upload.array("images"),postAbuelos);
-abueloRoutes.put("/:id", upload.array("images"),putAbuelos);
+abueloRoutes.post("/", upload.fields([{ name: 'perfil', maxCount: 1 }, { name: 'documentoFrente', maxCount: 1 }, { name: 'documentoDorso', maxCount: 1 }, { name: 'prepagaFrente', maxCount: 1 }, { name: 'prepagaDorso', maxCount: 1 }]),postAbuelos);
+abueloRoutes.put("/:id", upload.fields(["perfil", "documentoFrente", "documentoDorso", "prepagaFrente", "prepagaDorso"]),putAbuelos);
 abueloRoutes.delete("/:id",deleteAbuelos);
 
 module.exports = abueloRoutes
