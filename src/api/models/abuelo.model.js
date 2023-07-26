@@ -29,7 +29,8 @@ const abueloSchema = new Schema(
         documentoDorso: {type: String, required: false},
         prepagaFrente: {type: String, required: false},
         prepagaDorso: {type: String, required: false},
-        comentario: {type:String, require:false}
+        comentario: {type:String, require:false},
+        estado: {type: String, required: false}
     },
     {
         versionKey: false 
