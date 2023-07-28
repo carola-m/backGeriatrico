@@ -29,11 +29,8 @@ const postAbuelos = async(req, res) => {
         //console.log("req-files -----------", req.files);
         //console.log("req-body -----------", req.body);
         const newAbuelo = new Abuelo(req.body);
-        if (req.file) {
-            newAbuelo.perfil.push(req.file[0].path);
-        }
-        else if (req.files) {
-            console.log(req.files)
+        if (req.files) {
+            //console.log(req.files)
             if(req.files.perfil){
                 newAbuelo.perfil = req.files.perfil[0].path
             }
@@ -61,12 +58,29 @@ const postAbuelos = async(req, res) => {
 
 
 const putAbuelos = async(req, res) => {
+    console.log("entro en el put")
     try {
         const {id} = req.params;
         const putAbuelo = new Abuelo(req.body);
         putAbuelo._id = id;
-        if (req.file) {
-            putAbuelo.foto = req.file.path;
+        console.log(putAbuelo)
+         if (req.files) {
+            //console.log(req.files)
+            if(req.files.perfil){
+                putAbuelo.perfil = req.files.perfil[0].path
+            }
+            if(req.files.documentoFrente){
+                putAbuelo.documentoFrente = req.files.documentoFrente[0].path
+            }
+            if(req.files.documentoDorso){
+                putAbuelo.documentoDorso = req.files.documentoDorso[0].path
+            }
+            if(req.files.prepagaFrente){
+                putAbuelo.prepagaFrente = req.files.prepagaFrente[0].path
+            }
+            if(req.files.prepagaDorso){
+                putAbuelo.prepagaDorso = req.files.prepagaDorso[0].path
+            }
         }
         const updatedAbuelo = await Abuelo.findByIdAndUpdate(id, putAbuelo, {new: true});
         if(!updatedAbuelo){
