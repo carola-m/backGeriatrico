@@ -33,8 +33,8 @@ const abueloSchema = new Schema(
         estado: {type: String, required: false}
     },
     {
-        versionKey: false 
-        }
+        timestamps: true
+    }
 )
 
 const Abuelo = mongoose.model("abuelo", abueloSchema);

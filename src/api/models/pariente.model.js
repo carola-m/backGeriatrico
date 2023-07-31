@@ -15,7 +15,7 @@ const parienteSchema = new Schema(
         imagen:[{type: String, required: false}]
     },
     {
-        versionKey: false 
+        timestamps: true
     }
 )
 
