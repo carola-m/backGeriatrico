@@ -1,13 +1,15 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
+
 const cors = require('cors');
 const cloudinary = require('cloudinary').v2;
+
 const {isAuth} =require("./src/middlewares/auth")
-const {connect} = require("../HSV/utils/db")
-const parienteRoutes = require("../HSV/src/api/routes/pariente.routes")
+const {connect} = require("./utils/db")
+
+const parienteRoutes = require("./src/api/routes/pariente.routes")
 const abueloRoutes = require("./src/api/routes/abuelo.routes")
 const userRoutes = require("./src/api/routes/user.routes")
-PORT=process.env.PORT;
 
 // configuracion cloudinary
 cloudinary.config({
@@ -15,7 +17,10 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_KEY,
     api_secret: process.env.CLOUDINARY_SECRET
   });
+
+PORT=process.env.PORT;
 const app=express();
+
 connect();
 
 app.use((req, res, next) => {
